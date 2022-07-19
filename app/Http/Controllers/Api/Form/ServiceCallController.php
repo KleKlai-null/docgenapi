@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Form;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form\ServiceCallRequest;
 use App\Models\Form\ServiceCall;
 use Exception;
 use Illuminate\Http\Request;
@@ -48,29 +49,11 @@ class ServiceCallController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServiceCallRequest $request)
     {
         try {
 
-            $data = ServiceCall::create([
-                'document_series_no'        => $request->document_series_no,
-                'customer_name'             => $request->customer_name,
-                'contact_number'            => $request->contact_number,
-                'phone_no'                  => $request->phone_no,
-                'status'                    => $request->status,
-                'item_no'                   => $request->item_no,
-                'description'               => $request->description,
-                'mfr_serial_no'             => $request->mfr_serial_no,
-                'serial_no'                 => $request->serial_no,
-                'subject'                   => $request->subject,
-                'origin'                    => $request->origin,
-                'problem_type'              => $request->problem_type,
-                'assigned_to'               => $request->assigned_to,
-                'priority'                  => $request->priority,
-                'call_type'                 => $request->call_type,
-                'technician'                => $request->technician,
-                'remarks'                   => $request->remarks
-            ]);
+            $data = ServiceCall::create($request->validated());
 
             return $this->sendResponse($data);
 

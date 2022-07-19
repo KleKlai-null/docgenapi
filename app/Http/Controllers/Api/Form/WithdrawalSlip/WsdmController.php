@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Form\WithdrawalSlip;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form\WithdrawalSlip\WsdmRequest;
 use App\Models\Form\Item\DmItem;
 use App\Models\Form\WithdrawalSlip\Wsdm;
 use Exception;
@@ -50,23 +51,14 @@ class WsdmController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WsdmRequest $request)
     {
 
         try {
 
             DB::beginTransaction();
 
-            $data = Wsdm::create([
-                'document_series_no'    => $request->document_series_no,
-                'purpose'               => $request->purpose,
-                'customer_name'         => $request->customer_name,
-                'order_no'              => $request->order_no,
-                'product_name'          => $request->product_name,
-                'prepared_by'           => $request->prepared_by,
-                'approved_by'           => $request->approved_by,
-                'released_by'           => $request->released_by,
-            ]);
+            $data = Wsdm::create($request->validated());
 
             foreach ($request->items as $key => $item) {
                 DmItem::create([

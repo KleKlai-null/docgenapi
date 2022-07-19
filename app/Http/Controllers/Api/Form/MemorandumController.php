@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Form;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form\MemorandumRequest;
 use App\Models\Form\Memorandum;
 use Exception;
 use Illuminate\Http\Request;
@@ -49,23 +50,11 @@ class MemorandumController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MemorandumRequest $request)
     {
         try {
 
-            $data = Memorandum::create([
-                'document_series_no'    => $request->document_series_no,
-                'id_no'                 => $request->id_no,
-                'name_of_employee'      => $request->name_of_employee,
-                'department'            => $request->department,
-                'section'               => $request->section,
-                'asset_code'            => $request->asset_code,
-                'asset_type'            => $request->asset_type,
-                'asset_description'     => $request->asset_description,
-                'asset_serial_no'       => $request->asset_serial_no,
-                'asset_value'           => $request->asset_value
-            ]);
-
+            $data = Memorandum::create($request->validated());
 
             return $this->sendResponse($data);
 

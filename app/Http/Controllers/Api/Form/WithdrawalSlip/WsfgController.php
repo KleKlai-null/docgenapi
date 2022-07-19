@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Form\WithdrawalSlip;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form\WithdrawalSlip\WsfgRequest;
 use App\Models\Form\Item\FgItem;
 use App\Models\Form\WithdrawalSlip\Wsfg;
 use Exception;
@@ -50,21 +51,13 @@ class WsfgController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WsfgRequest $request)
     {
         try {
 
             DB::beginTransaction();
 
-            $data = Wsfg::create([
-                'document_series_no'    => $request->document_series_no,
-                'batch_no'              => $request->batch_no,
-                'pallet_no'             => $request->pallet_no,
-                'location'              => $request->location,
-                'prepared_by'           => $request->prepared_by,
-                'approved_by'           => $request->approved_by,
-                'released_by'           => $request->released_by
-            ]);
+            $data = Wsfg::create($request->validated());
 
             foreach ($request->items as $key => $item) {
                 FgItem::create([

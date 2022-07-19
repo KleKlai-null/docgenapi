@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Form\WithdrawalSlip;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form\WithdrawalSlip\WsmaRequest;
 use App\Models\Form\Item\MaItem;
 use App\Models\Form\WithdrawalSlip\Wsma;
 use Exception;
@@ -50,20 +51,13 @@ class WsmaController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WsmaRequest $request)
     {
         try {
 
             DB::beginTransaction();
 
-            $data = Wsma::create([
-                'document_series_no'    => $request->document_series_no,
-                'department'            => $request->department,
-                'mr_no'                 => $request->mr_no,
-                'prepared_by'           => $request->prepared_by,
-                'approved_by'           => $request->approved_by,
-                'released_by'           => $request->released_by
-            ]);
+            $data = Wsma::create($request->validated());
 
             foreach ($request->items as $key => $item) {
                 MaItem::create([
