@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Public;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DocumentVerificationRequest;
 use App\Models\Form\Memorandum;
 use App\Models\Form\ReturnSlip\ReturnSlip;
 use App\Models\Form\ServiceCall;
@@ -23,8 +24,10 @@ class DocumentVerificationController extends ApiController
      * 
      * @ Document Verification for MI
      */
-    public function verifyMI(Request $request)
+    public function verifyMI(DocumentVerificationRequest $request)
     {
+        $request->validated();
+
         //Check Document Series Number
 
         $splice = Str::of($request->key)->explode('-');
