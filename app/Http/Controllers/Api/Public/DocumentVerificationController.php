@@ -79,7 +79,7 @@ class DocumentVerificationController extends ApiController
                 return $this->sendResponse($data);
                 break;
             default:
-                return $this->sendResponse('Identifier could not recognize.');
+                return $this->sendError('Identifier could not recognize.');
         }
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Form\ReturnSlip;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form\ReturnSlip\ReturnSlipRequest;
 use App\Models\Form\Item\ReturnItem;
 use App\Models\Form\ReturnSlip\ReturnSlip;
 use Exception;
@@ -51,7 +52,7 @@ class ReturnSlipController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReturnSlipRequest $request)
     {
         try {
 

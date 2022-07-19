@@ -57,20 +57,8 @@ class WsmiController extends ApiController
         try {
 
             DB::beginTransaction();
-            return $this->sendResponse($request->validated());
+
             $data = Wsmi::create($request->validated());
-            // $data = Wsmi::create([
-            //     'customer_name'         => $request->customer_name,
-            //     'document_series_no'    => $request->document_series_no,
-            //     'pallet_no'             => $request->pallet_no,
-            //     'warehouse'             => $request->warehouse,
-            //     'wh_location'           => $request->wh_location,
-            //     'profit_center'         => $request->profit_center,
-            //     'sub_profit_center'     => $request->sub_profit_center,
-            //     'prepared_by'           => $request->prepared_by,
-            //     'approved_by'           => $request->approved_by,
-            //     'released_by'           => $request->released_by
-            // ]);
 
             foreach ($request->items as $key => $item) {
                 MiItem::create([

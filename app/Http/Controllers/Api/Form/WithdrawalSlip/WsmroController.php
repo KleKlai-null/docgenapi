@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Form\WithdrawalSlip;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form\WithdrawalSlip\WsmroRequest;
 use App\Models\Form\Item;
 use App\Models\Form\Item\MroItem;
 use App\Models\Form\WithdrawalSlip\Wsmro;
@@ -51,14 +52,14 @@ class WsmroController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WsmroRequest $request)
     {
         try {
 
             DB::beginTransaction();
+            $data = Wsmro::create($request->validated());
 
             $data = Wsmro::create([
-                'document_series_no'    => $request->document_series_no,
                 'profit_center'         => $request->profit_center,
                 'sub_profit_center'     => $request->sub_profit_center,
                 'cost_center'           => $request->cost_center,

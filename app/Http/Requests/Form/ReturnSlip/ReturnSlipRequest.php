@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Form\WIthdrawalSlip;
+namespace App\Http\Requests\Form\ReturnSlip;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class WsmiRequest extends FormRequest
+class ReturnSlipRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,16 +26,13 @@ class WsmiRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_name'         => 'required',
-            'pallet_no'             => 'required',
-            'warehouse'             => 'required',
-            'wh_location'           => 'required',
-            'profit_center'         => 'required',
-            'sub_profit_center'     => 'required',
+            'department'            => 'required',
+            'mr_no'                 => 'required',
+            'document_series_no'    => 'required',
+            'withdrawal_slip_no'    => 'required',
             'prepared_by'           => 'required',
             'approved_by'           => 'required',
-            'released_by'           => 'required',
-            'items.*'               => 'required'
+            'received_by'           => 'required',
         ];
     }
 

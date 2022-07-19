@@ -3,6 +3,7 @@
 namespace App\Models\Form\WithdrawalSlip;
 
 use App\Models\Form\Item\DmItem;
+use App\Services\DocumentService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +14,15 @@ class Wsdm extends Model
     protected $guarded = [
         'id', 'created_at', 'updated_at'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        Wsdm::creating(function($model) {
+            $model->document_series_no = DocumentService::GenerateSeriesNo('GFI', 'DM');
+        });
+    }
 
     public function items()
     {
