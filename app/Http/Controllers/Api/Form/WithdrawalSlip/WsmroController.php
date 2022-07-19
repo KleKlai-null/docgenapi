@@ -57,16 +57,8 @@ class WsmroController extends ApiController
         try {
 
             DB::beginTransaction();
-            $data = Wsmro::create($request->validated());
 
-            $data = Wsmro::create([
-                'profit_center'         => $request->profit_center,
-                'sub_profit_center'     => $request->sub_profit_center,
-                'cost_center'           => $request->cost_center,
-                'prepared_by'           => $request->prepared_by,
-                'approved_by'           => $request->approved_by,
-                'released_by'           => $request->released_by
-            ]);
+            $data = Wsmro::create($request->validated());
 
             foreach ($request->items as $key => $item) {
                 MroItem::create([
