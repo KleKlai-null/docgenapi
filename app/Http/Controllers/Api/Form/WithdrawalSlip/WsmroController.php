@@ -58,6 +58,8 @@ class WsmroController extends ApiController
 
             DB::beginTransaction();
 
+            //Begin
+
             $data = Wsmro::create($request->validated());
 
             foreach ($request->items as $key => $item) {
