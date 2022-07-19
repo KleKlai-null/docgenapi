@@ -26,7 +26,6 @@ class DocumentVerificationController extends ApiController
      */
     public function verifyMI(DocumentVerificationRequest $request)
     {
-        $request->validated();
 
         //Check Document Series Number
 
@@ -37,48 +36,69 @@ class DocumentVerificationController extends ApiController
         switch ($unique) {
             case "mi":
 
-                $data = Wsmi::with('items')->DocumentSeries($request->key)->get();
+                $data = Wsmi::with('items')->DocumentSeries($request->key)->first();
+
+                if(!$data){
+                    return $this->sendError('Record does not exist or has been deleted.');
+                }
 
                 return $this->sendResponse($data);
                 break;
             case "mro":
-                $data = Wsmro::with('items')->DocumentSeries($request->key)->get();
+                $data = Wsmro::with('items')->DocumentSeries($request->key)->first();
 
+                if(!$data){
+                    return $this->sendError('Record does not exist or has been deleted.');
+                }
                 return $this->sendResponse($data);
                 break;
             case "dm":
-                $data = Wsdm::with('items')->DocumentSeries($request->key)->get();
-
+                $data = Wsdm::with('items')->DocumentSeries($request->key)->first();
+                if(!$data){
+                    return $this->sendError('Record does not exist or has been deleted.');
+                }
                 return $this->sendResponse($data);
                 break;
             case "fg":
-                $data = Wsfg::with('items')->DocumentSeries($request->key)->get();
-
+                $data = Wsfg::with('items')->DocumentSeries($request->key)->first();
+                if(!$data){
+                    return $this->sendError('Record does not exist or has been deleted.');
+                }
                 return $this->sendResponse($data);
                 break;
             case "fa":
-                $data = Wsfa::with('items')->DocumentSeries($request->key)->get();
-
+                $data = Wsfa::with('items')->DocumentSeries($request->key)->first();
+                if(!$data){
+                    return $this->sendError('Record does not exist or has been deleted.');
+                }
                 return $this->sendResponse($data);
                 break;
             case "ma":
-                $data = Wsma::with('items')->DocumentSeries($request->key)->get();
-
+                $data = Wsma::with('items')->DocumentSeries($request->key)->first();
+                if(!$data){
+                    return $this->sendError('Record does not exist or has been deleted.');
+                }
                 return $this->sendResponse($data);
                 break;
             case "sc":
-                $data = ServiceCall::DocumentSeries($request->key)->get();
-
+                $data = ServiceCall::DocumentSeries($request->key)->first();
+                if(!$data){
+                    return $this->sendError('Record does not exist or has been deleted.');
+                }
                 return $this->sendResponse($data);
                 break;
             case "mr":
-                $data = Memorandum::DocumentSeries($request->key)->get();
-
+                $data = Memorandum::DocumentSeries($request->key)->first();
+                if(!$data){
+                    return $this->sendError('Record does not exist or has been deleted.');
+                }
                 return $this->sendResponse($data);
                 break;
             case "rs":
-                $data = ReturnSlip::with('items')->DocumentSeries($request->key)->get();
-
+                $data = ReturnSlip::with('items')->DocumentSeries($request->key)->first();
+                if(!$data){
+                    return $this->sendError('Record does not exist or has been deleted.');
+                }
                 return $this->sendResponse($data);
                 break;
             default:
