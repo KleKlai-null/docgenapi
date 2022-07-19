@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Form\WithdrawalSlip;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Form\WIthdrawalSlip\WsmiRequest;
+use App\Http\Requests\Form\WithdrawalSlip\WsmiRequest;
 use App\Models\Form\Item;
 use App\Models\Form\Item\MiItem;
 use App\Models\Form\WithdrawalSlip\Wsmi;
