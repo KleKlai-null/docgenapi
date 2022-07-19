@@ -26,10 +26,15 @@ class WsmiController extends ApiController
             if ($request->id) {
                 $data = Wsmi::with('items')->find($request->id);
 
+                if(!$data){
+                    return $this->sendError('Record does not exist or has been deleted.');
+                }
+
                 return $this->sendResponse($data);
             }
 
             return $this->sendResponse(Wsmi::with('items')->get());
+
         } catch (Exception $exception) {
             return $this->sendError($exception);
         }
