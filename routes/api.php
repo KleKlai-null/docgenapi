@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Form\WithdrawalSlip\WsfgController;
 use App\Http\Controllers\Api\Form\WithdrawalSlip\WsmaController;
 use App\Http\Controllers\Api\Form\WithdrawalSlip\WsmiController;
 use App\Http\Controllers\Api\Form\WithdrawalSlip\WsmroController;
+use App\Http\Controllers\Api\TotalRecordController;
 use App\Models\Form\WithdrawalSlip\Wsma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,7 @@ Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:
 
 Route::prefix('create')->middleware('auth:api')->group(function () {
 
+    Route::get('formcount', [TotalRecordController::class, 'formCount']);
     /**
      * @Withdrawal Forms
      */
