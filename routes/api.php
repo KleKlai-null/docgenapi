@@ -37,7 +37,6 @@ Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:
 
 Route::prefix('create')->middleware('auth:api')->group(function () {
 
-    Route::get('formcount', [TotalRecordController::class, 'formCount']);
     /**
      * @Withdrawal Forms
      */
@@ -61,6 +60,11 @@ Route::prefix('create')->middleware('auth:api')->group(function () {
 });
 
 Route::prefix('get')->middleware('auth:api')->group(function () {
+
+    /**
+     * @Dashboard Data
+     */
+    Route::get('formcount', [TotalRecordController::class, 'formCount']);
 
     /**
      * @Withdrawal Forms Index
