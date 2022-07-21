@@ -26,9 +26,9 @@ class ReturnSlipRequest extends FormRequest
     public function rules()
     {
         return [
+            'withdrawal_form'       => 'required',
             'department'            => 'required',
             'mr_no'                 => 'required',
-            'document_series_no'    => 'required',
             'withdrawal_slip_no'    => 'required',
             'prepared_by'           => 'required',
             'approved_by'           => 'required',

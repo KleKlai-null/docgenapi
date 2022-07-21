@@ -8,6 +8,7 @@ use App\Http\Requests\Form\ReturnSlip\ReturnSlipRequest;
 use App\Models\Form\Item\ReturnItem;
 use App\Models\Form\ReturnSlip\ReturnSlip;
 use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,8 +28,44 @@ class ReturnSlipController extends ApiController
     
                 return $this->sendResponse($data);
             }
-    
-            return $this->sendResponse(ReturnSlip::with('items')->get());
+
+            $unique = Str::lower($request->form);
+
+            switch ($unique) {
+                case "mi":
+
+                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'mi')->get();
+
+                    return $data;
+                    break;
+                case "mro":
+                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'mro')->get();
+
+                    return $data;
+                    break;
+                case "dm":
+                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'dm')->get();
+
+                    return $data;
+                    break;
+                case "fg":
+                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'fg')->get();
+
+                    return $data;
+                    break;
+                case "fa":
+                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'fa')->get();
+
+                    return $data;
+                    break;
+                case "ma":
+                    $data = $data = ReturnSlip::with('items')->where('withdrawal_form', 'ma')->get();
+
+                    return $data;
+                    break;
+                default:
+                    return 'No result found';
+            }
 
         } catch (Exception $exception) {
             return $this->sendError($exception);
@@ -59,6 +96,7 @@ class ReturnSlipController extends ApiController
             DB::beginTransaction();
 
             $data = ReturnSlip::create([
+                'withdrawal_form'       => Str::lower($request->withdrawal_form),
                 'department'            => $request->department,
                 'mr_no'                 => $request->mr_no,
                 'document_series_no'    => $request->document_series_no,
