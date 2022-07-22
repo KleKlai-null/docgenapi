@@ -24,7 +24,7 @@ class WsmiController extends ApiController
         try {
 
             if ($request->id) {
-                $data = Wsmi::with('items')->find($request->id);
+                $data = Wsmi::with('items')->orderBy('id', 'desc')->find($request->id);
 
                 if (!$data) {
                     return $this->sendError('Record does not exist or has been deleted.');
@@ -33,7 +33,7 @@ class WsmiController extends ApiController
                 return $this->sendResponse($data);
             }
 
-            return $this->sendResponse(Wsmi::with('items')->get());
+            return $this->sendResponse(Wsmi::with('items')->orderBy('id', 'desc')->get());
         } catch (Exception $exception) {
             return $this->sendError($exception);
         }

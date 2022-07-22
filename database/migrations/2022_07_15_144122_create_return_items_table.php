@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('item_code');
             $table->string('item_description');
             $table->bigInteger('qty');
-            $table->string('uom');
+            $table->string('uom')->nullable();
+            $table->string('serial_no')->nullable();
             $table->longText('reason')->nullable();
             $table->timestamps();
         });

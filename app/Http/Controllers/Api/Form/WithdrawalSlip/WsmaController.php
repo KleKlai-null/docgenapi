@@ -23,12 +23,12 @@ class WsmaController extends ApiController
         try {
 
             if($request->id){
-                $data = Wsma::with('items')->find($request->id);
+                $data = Wsma::with('items')->find($request->id)->orderBy('id', 'desc')->first();
     
                 return $this->sendResponse($data);
             }
     
-            return $this->sendResponse(Wsma::with('items')->get());
+            return $this->sendResponse(Wsma::with('items')->orderBy('id', 'desc')->get());
 
         } catch (Exception $exception) {
             return $this->sendError($exception);

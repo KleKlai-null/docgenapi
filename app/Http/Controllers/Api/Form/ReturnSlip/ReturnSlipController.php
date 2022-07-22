@@ -24,7 +24,7 @@ class ReturnSlipController extends ApiController
         try {
 
             if($request->id){
-                $data = ReturnSlip::with('items')->find($request->id);
+                $data = ReturnSlip::with('items')->find($request->id)->orderBy('id', 'desc')->get();
     
                 return $this->sendResponse($data);
             }
@@ -34,32 +34,32 @@ class ReturnSlipController extends ApiController
             switch ($unique) {
                 case "mi":
 
-                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'mi')->get();
+                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'mi')->orderBy('id', 'desc')->get();
 
                     return $data;
                     break;
                 case "mro":
-                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'mro')->get();
+                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'mro')->orderBy('id', 'desc')->get();
 
                     return $data;
                     break;
                 case "dm":
-                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'dm')->get();
+                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'dm')->orderBy('id', 'desc')->get();
 
                     return $data;
                     break;
                 case "fg":
-                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'fg')->get();
+                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'fg')->orderBy('id', 'desc')->get();
 
                     return $data;
                     break;
                 case "fa":
-                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'fa')->get();
+                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'fa')->orderBy('id', 'desc')->get();
 
                     return $data;
                     break;
                 case "ma":
-                    $data = $data = ReturnSlip::with('items')->where('withdrawal_form', 'ma')->get();
+                    $data = $data = ReturnSlip::with('items')->where('withdrawal_form', 'ma')->orderBy('id', 'desc')->get();
 
                     return $data;
                     break;
@@ -107,14 +107,27 @@ class ReturnSlipController extends ApiController
             ]);
 
             foreach ($request->items as $key => $item) {
-                ReturnItem::create([
-                    'return_slip_id'        => $data->id,
-                    'item_code'             => $item['item_code'],
-                    'item_description'      => $item['item_description'],
-                    'qty'                   => $item['qty'],
-                    'uom'                   => $item['uom'],
-                    'reason'                => $item['reason']
-                ]);
+
+                if($request->withdrawal_form == 'fa' || $request->withdrawal_form == 'ma')
+                {
+                    ReturnItem::create([
+                        'return_slip_id'        => $data->id,
+                        'item_code'             => $item['item_code'],
+                        'item_description'      => $item['item_description'],
+                        'qty'                   => $item['qty'],
+                        'serial_no'             => $item['serial_no'],
+                        'reason'                => $item['reason']
+                    ]);
+                } else {
+                    ReturnItem::create([
+                        'return_slip_id'        => $data->id,
+                        'item_code'             => $item['item_code'],
+                        'item_description'      => $item['item_description'],
+                        'qty'                   => $item['qty'],
+                        'uom'                   => $item['uom'],
+                        'reason'                => $item['reason']
+                    ]);
+                }
             }
 
             DB::commit();

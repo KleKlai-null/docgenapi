@@ -22,12 +22,12 @@ class MemorandumController extends ApiController
         try {
 
             if($request->id){
-                $data = Memorandum::find($request->id);
+                $data = Memorandum::find($request->id)->orderBy('id', 'desc')->get();
     
                 return $this->sendResponse($data);
             }
     
-            return $this->sendResponse(Memorandum::all());
+            return $this->sendResponse(Memorandum::orderBy('id', 'desc')->get());
 
         } catch (Exception $exception) {
             return $this->sendError($exception);

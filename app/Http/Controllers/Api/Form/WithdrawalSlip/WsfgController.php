@@ -23,12 +23,12 @@ class WsfgController extends ApiController
         try {
 
             if($request->id){
-                $data = Wsfg::with('items')->find($request->id);
+                $data = Wsfg::with('items')->find($request->id)->orderBy('id', 'desc')->first();
     
                 return $this->sendResponse($data);
             }
     
-            return $this->sendResponse(Wsfg::with('items')->get());
+            return $this->sendResponse(Wsfg::with('items')->orderBy('id', 'desc')->get());
 
         } catch (Exception $exception) {
             return $this->sendError($exception);

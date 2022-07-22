@@ -21,12 +21,12 @@ class ServiceCallController extends ApiController
         try {
 
             if($request->id){
-                $data = ServiceCall::find($request->id);
+                $data = ServiceCall::find($request->id)->orderBy('id', 'desc')->get();
     
                 return $this->sendResponse($data);
             }
     
-            return $this->sendResponse(ServiceCall::all());
+            return $this->sendResponse(ServiceCall::orderBy('id', 'desc')->get());
 
         } catch (Exception $exception) {
             return $this->sendError($exception);

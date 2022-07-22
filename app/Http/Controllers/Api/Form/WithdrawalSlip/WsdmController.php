@@ -23,12 +23,12 @@ class WsdmController extends ApiController
         try {
 
             if($request->id){
-                $data = Wsdm::with('items')->find($request->id);
+                $data = Wsdm::with('items')->find($request->id)->orderBy('id', 'desc')->first();
     
                 return $this->sendResponse($data);
             }
     
-            return $this->sendResponse(Wsdm::with('items')->get());
+            return $this->sendResponse(Wsdm::with('items')->orderBy('id', 'desc')->get());
 
         } catch (Exception $exception) {
             return $this->sendError($exception);

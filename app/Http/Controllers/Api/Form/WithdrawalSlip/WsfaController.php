@@ -23,12 +23,12 @@ class WsfaController extends ApiController
         try {
 
             if($request->id){
-                $data = Wsfa::with('items')->find($request->id);
+                $data = Wsfa::with('items')->find($request->id)->orderBy('id', 'desc')->first();
     
                 return $this->sendResponse($data);
             }
     
-            return $this->sendResponse(Wsfa::with('items')->get());
+            return $this->sendResponse(Wsfa::with('items')->orderBy('id', 'desc')->get());
 
         } catch (Exception $exception) {
             return $this->sendError($exception);
