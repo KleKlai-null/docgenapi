@@ -8,7 +8,6 @@ use App\Http\Requests\Form\MemorandumRequest;
 use App\Models\Form\Memorandum;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class MemorandumController extends ApiController
 {

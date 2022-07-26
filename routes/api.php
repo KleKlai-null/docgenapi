@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\Form\WithdrawalSlip\WsmaController;
 use App\Http\Controllers\Api\Form\WithdrawalSlip\WsmiController;
 use App\Http\Controllers\Api\Form\WithdrawalSlip\WsmroController;
 use App\Http\Controllers\Api\TotalRecordController;
+use App\Http\Controllers\Api\UserManagementController;
+use App\Models\User;
 use App\Models\Form\WithdrawalSlip\Wsma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -96,3 +98,21 @@ Route::prefix('service')->group(function () {
     Route::get('verify', [DocumentVerificationController::class, 'verifyMI']);
 });
 
+Route::prefix('manage')->middleware('auth:api')->group(function () {
+
+    Route::get('users', [UserManagementController::class, 'index']);
+    Route::get('user/update', [UserManagementController::class, 'update']);
+    Route::get('update/profile', [UserManagementController::class, 'updateCurrentUser']);
+
+});
+
+
+// Route::group(['middleware' => ['auth:api'], ['role:mi_clerk']], function () {
+    
+//     Route::get('/test', function () {
+//         return response()->json([
+//             'data'  => User::findOrFail(auth()->user()->id)
+//         ]);
+//     });
+
+// });

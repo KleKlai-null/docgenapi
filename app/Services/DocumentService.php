@@ -12,6 +12,8 @@ use App\Models\Form\WithdrawalSlip\Wsmi;
 use App\Models\Form\WithdrawalSlip\Wsmro;
 use App\Models\Form\Memorandum;
 use App\Models\Form\ServiceCall;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentService
 {
@@ -81,5 +83,12 @@ class DocumentService
             default:
                 return 'test';
         }
+    }
+
+    public static function generatePDF($data)
+    {
+        
+
+        return 'success';
     }
 }

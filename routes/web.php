@@ -18,8 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::post('form/show', [ShowForm::class, 'show']);
 Route::get('form/show', [ShowForm::class, 'show']);
-
-Route::get('test', function () {
-    return view('pdf');
-});

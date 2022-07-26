@@ -57,7 +57,6 @@ class WsmiController extends ApiController
      */
     public function store(WsmiRequest $request)
     {
-
         try {
 
             DB::beginTransaction();
