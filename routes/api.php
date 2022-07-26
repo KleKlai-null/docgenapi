@@ -105,14 +105,3 @@ Route::prefix('manage')->middleware('auth:api')->group(function () {
     Route::get('update/profile', [UserManagementController::class, 'updateCurrentUser']);
 
 });
-
-
-Route::group(['middleware' => ['auth:api'], ['role:mi_clerk']], function () {
-    
-    Route::get('/test', function () {
-        return response()->json([
-            'data'  => User::findOrFail(auth()->user()->id)
-        ]);
-    });
-
-});
