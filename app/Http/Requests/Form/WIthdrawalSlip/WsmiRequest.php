@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Form\WIthdrawalSlip;
+namespace App\Http\Requests\Form\WithdrawalSlip;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
