@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Container\Form\Withdrawal\ShowForm;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('form/show', [ShowForm::class, 'show']);
+
+Route::get('test', function () {
+    return view('pdf');
 });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ActivityLogController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Form\MemorandumController;
 use App\Http\Controllers\Api\Public\DocumentVerificationController;
@@ -40,7 +41,7 @@ Route::prefix('create')->middleware('auth:api')->group(function () {
     /**
      * @Withdrawal Forms
      */
-    Route::post('wsmi', [WsmiController::class, 'store']);
+    Route::post('wsmi', [WsmiController::class, 'store'])->middleware('role:mi_clerk|administrator');
     Route::post('wsmro', [WsmroController::class, 'store']);
     Route::post('wsdm', [WsdmController::class, 'store']);
     Route::post('wsfg', [WsfgController::class, 'store']);
@@ -86,6 +87,8 @@ Route::prefix('get')->middleware('auth:api')->group(function () {
      * @Return Slip
      */
     Route::get('returnslip', [ReturnSlipController::class, 'index']);
+
+    Route::get('log', [ActivityLogController::class, 'index']);
 });
 
 Route::prefix('service')->group(function () {

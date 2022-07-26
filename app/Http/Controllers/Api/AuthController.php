@@ -39,12 +39,13 @@ class AuthController extends ApiController
                 return $this->sendError('Email & Password does not match with our record.');
             }
 
-            $user = User::where('email', $request->email)->first();
+            $user = User::with('roles')->where('email', $request->email)->first();
 
             return response()->json([
-                'status' => true,
-                'message' => 'User Logged In Successfully',
-                'token' => $user->createToken('DocgenFrontEnd')->plainTextToken
+                'status'    => true,
+                'message'   => 'User Logged In Successfully',
+                'token'     => $user->createToken('DocgenFrontEnd')->plainTextToken,
+                'user'      => $user
             ], 200);
         } catch (Exception $exception) {
 
