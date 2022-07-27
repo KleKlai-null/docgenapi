@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 
 class UserManagementController extends ApiController
@@ -19,33 +20,41 @@ class UserManagementController extends ApiController
     // Update existing user
     public function update(Request $request)
     {
-        $data = User::where('email', $request->email)->first();
+        try {
 
-        $request->validate([
-            'password' => 'required',
-        ]);
+            $data = User::where('email', $request->email)->first();
 
-        $data->update([
-            'password'  => Hash::make($request->password)
-        ]);
+            $this->validate($request, [
+                'password'  => 'required'
+            ]);
 
-        //Get User Roles && sync new roles
+            $data->update([
+                'password'  => Hash::make($request->password)
+            ]);
 
-        return $this->sendResponse($data);
+            //Get User Roles && sync new roles
+
+            return $this->sendResponse($data);
+
+        } catch (Exception $exception) {
+            return $this->sendError($exception);
+        }
     }
 
     public function updateCurrentUser(Request $request)
     {
-        $data = User::findOrFail(auth()->user()->id);
+        try {
 
-        $request->validate([
-            'password' => 'required',
-        ]);
+            $data = User::findOrFail(auth()->user()->id);
 
-        $data->update([
-            'password'  => Hash::make($request->password)
-        ]);
+            $data->update([
+                'password'  => Hash::make($request->password)
+            ]);
 
-        return $this->sendResponse($data);
+            return $this->sendResponse($data);
+
+        } catch (Exception $exception) {
+            return $this->sendError($exception);
+        }
     }
 }

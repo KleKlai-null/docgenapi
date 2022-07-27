@@ -101,7 +101,7 @@ Route::prefix('service')->group(function () {
 Route::prefix('manage')->middleware('auth:api')->group(function () {
 
     Route::get('users', [UserManagementController::class, 'index']);
-    Route::get('user/update', [UserManagementController::class, 'update']);
-    Route::get('update/profile', [UserManagementController::class, 'updateCurrentUser']);
+    Route::post('user/update', [UserManagementController::class, 'update']);
+    Route::post('profile/update', [UserManagementController::class, 'updateCurrentUser']);
 
 });
