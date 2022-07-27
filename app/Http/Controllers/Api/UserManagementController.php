@@ -14,7 +14,7 @@ class UserManagementController extends ApiController
     // Return all user with roles
     public function index()
     {
-        return $this->sendResponse(User::with('roles')->all());
+        return $this->sendResponse(User::with('roles')->get());
     }
 
     // Update existing user
