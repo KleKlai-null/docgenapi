@@ -85,6 +85,64 @@ class DocumentService
         }
     }
 
+    public static function getDocument($data)
+    {
+        $splice = Str::of($data)->explode('-');
+        $unique = Str::lower($splice[1]);
+
+        $data = substr($data, 4);
+
+        switch ($unique) {
+            case "mi":
+                $data = Wsmi::with('items')->DocumentSeries($data)->first();
+
+                return $data;
+                break;
+            case "mro":
+                $data = Wsmro::with('items')->DocumentSeries($data)->first();
+
+                return $data;
+                break;
+            case "dm":
+                $data = Wsdm::with('items')->DocumentSeries($data)->first();
+
+                return $data;
+                break;
+            case "fg":
+                $data = Wsfg::with('items')->DocumentSeries($data)->first();
+
+                return $data;
+                break;
+            case "fa":
+                $data = Wsfa::with('items')->DocumentSeries($data)->first();
+
+                return $data;
+                break;
+            case "ma":
+                $data = Wsma::with('items')->DocumentSeries($data)->first();
+
+                return $data;
+                break;
+            case "sc":
+                $data = ServiceCall::with('items')->DocumentSeries($data)->first();
+
+                return $data;
+                break;
+            case "mr":
+                $data = Memorandum::with('items')->DocumentSeries($data)->first();
+
+                return $data;
+                break;
+            case "rs":
+                $data = ReturnSlip::with('items')->DocumentSeries($data)->first();
+
+                return $data;
+                break;
+            default:
+                return 'No Result Found';
+        }
+    }
+
     public static function generatePDF($data)
     {
         

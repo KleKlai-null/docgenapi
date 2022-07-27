@@ -15,6 +15,12 @@ use Illuminate\Http\Request;
 
 class TotalRecordController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['role:administrator']);
+    }
+
     public function formCount()
     {
         $mi = Wsmi::count();

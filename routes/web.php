@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Container\DocVerificationController;
 use App\Http\Controllers\Container\Form\Withdrawal\ShowForm;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,6 @@ Route::get('/', function () {
 
 // Route::post('form/show', [ShowForm::class, 'show']);
 Route::get('form/show', [ShowForm::class, 'show']);
+
+// Public Access
+Route::get('/verify/{key?}', [DocVerificationController::class, 'verifyDocument']);

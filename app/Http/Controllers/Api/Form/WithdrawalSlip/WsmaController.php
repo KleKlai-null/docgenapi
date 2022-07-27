@@ -18,6 +18,11 @@ class WsmaController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['role:ma_clerk|administrator']);
+    }
+
     public function index(Request $request)
     {
         try {

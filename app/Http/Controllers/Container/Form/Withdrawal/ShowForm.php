@@ -29,8 +29,8 @@ class ShowForm extends Controller
                 abort_if(!$data, 404);
                 // Generate PDF File
 
-                $pdf = PDF::loadView('forms.pdf.mi', compact('data'));
-                $content = $pdf->stream();
+                // $pdf = PDF::loadView('forms.pdf.mi', compact('data'));
+                // $content = $pdf->stream();
 
                 // DocumentService::generatePDF($data);
 

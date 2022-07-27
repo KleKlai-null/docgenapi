@@ -16,6 +16,11 @@ class ServiceCallController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['role:sc_clerk|administrator']);
+    }
+
     public function index(Request $request)
     {
         try {

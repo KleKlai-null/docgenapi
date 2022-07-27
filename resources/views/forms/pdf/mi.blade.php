@@ -273,7 +273,7 @@
 
         <div>
             <div id="logo">
-                {{-- <div id="qrcode"></div> --}}
+                <div id="qrcode"></div>
                 <span class="text-muted">{{ $data->document_series_no }}</span>
             </div>
         </div>
@@ -346,7 +346,7 @@
         </div>
     </div>
 </body>
-{{-- <script src="{{ asset('asset/js/qrcode.js') }}"></script>
+<script src="{{ asset('asset/js/qrcode.js') }}"></script>
 
 <script>
     var qrcode = new QRCode("qrcode", {
@@ -357,6 +357,6 @@
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.H
     });
-</script> --}}
+</script>
 
 </html>

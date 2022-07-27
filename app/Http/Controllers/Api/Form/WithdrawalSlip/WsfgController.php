@@ -18,6 +18,11 @@ class WsfgController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['role:fg_clerk|administrator']);
+    }
+
     public function index(Request $request)
     {
         try {
