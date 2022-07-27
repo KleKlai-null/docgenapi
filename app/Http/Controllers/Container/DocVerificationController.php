@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class DocVerificationController extends Controller
 {
     public function verifyDocument(Request $request)
-    {
+    {   
         $data = DocumentService::getDocument($request->key);
 
         if(!$data) {
