@@ -18,6 +18,11 @@ class WsfaController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['role:fa_clerk|administrator']);
+    }
+
     public function index(Request $request)
     {
         try {

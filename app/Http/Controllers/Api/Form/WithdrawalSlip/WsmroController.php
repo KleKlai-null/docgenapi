@@ -19,6 +19,11 @@ class WsmroController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['role:mro_clerk|administrator']);
+    }
+
     public function index(Request $request)
     {
 

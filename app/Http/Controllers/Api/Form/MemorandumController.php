@@ -16,6 +16,11 @@ class MemorandumController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['role:mr_clerk|administrator']);
+    }
+
     public function index(Request $request)
     {
         try {

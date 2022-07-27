@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\DB;
 
 class WsmiController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware(['role:mi_clerk|administrator']);
+    }
+
     public function index(Request $request)
     {
         try {
@@ -77,7 +77,6 @@ class WsmiController extends ApiController
             DB::commit();
 
             return $this->sendResponse($data);
-            
         } catch (Exception $exception) {
 
             DB::rollback();
