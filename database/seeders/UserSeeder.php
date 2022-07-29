@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
     {
 
         $roles = Role::select('id', 'name')->orderBy('id', 'ASC')->get()->toArray();
-
         $users = [
             [
                 'name' => 'MI User',

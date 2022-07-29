@@ -161,7 +161,7 @@
     }
 
     p.sub {
-        font-size: 10px;
+        font-size: 13px;
     }
 
     #meta {
@@ -219,26 +219,6 @@
         <table id="meta">
             <tr>
                 <td class="borderless">
-                    <h6>Customer Name</h6>
-                </td>
-                <td class="borderless">
-                    <div>
-                        <p class="sub">{{ $data->customer_name }}</p>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="borderless">
-                    <h6>Pallet No.</h6>
-                </td>
-                <td class="borderless">
-                    <div>
-                        <p class="sub">{{ $data->pallet_no }}</p>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="borderless">
                     <h6>Profit Center</h6>
                 </td>
                 <td class="borderless">
@@ -259,21 +239,11 @@
             </tr>
             <tr>
                 <td class="borderless">
-                    <h6>Warehouse</h6>
+                    <h6>Cost Center</h6>
                 </td>
                 <td class="borderless">
                     <div>
-                        <p class="sub">{{ $data->warehouse }}</p>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="borderless">
-                    <h6>Warehouse Location</h6>
-                </td>
-                <td class="borderless">
-                    <div>
-                        <p class="sub">{{ $data->wh_location }}</p>
+                        <p class="sub">{{ $data->cost_center }}</p>
                     </div>
                 </td>
             </tr>

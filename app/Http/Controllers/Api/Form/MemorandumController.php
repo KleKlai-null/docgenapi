@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Form\MemorandumRequest;
 use App\Models\Form\Memorandum;
+use App\Services\DocumentService;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -59,6 +60,8 @@ class MemorandumController extends ApiController
         try {
 
             $data = Memorandum::create($request->validated());
+
+            DocumentService::generatePDF($data, 'mr'); //Generate PDF for Backup
 
             return $this->sendResponse($data);
 

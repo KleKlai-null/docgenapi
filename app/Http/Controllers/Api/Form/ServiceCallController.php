@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Form\ServiceCallRequest;
 use App\Models\Form\ServiceCall;
+use App\Services\DocumentService;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -59,6 +60,8 @@ class ServiceCallController extends ApiController
         try {
 
             $data = ServiceCall::create($request->validated());
+
+            DocumentService::generatePDF($data, 'sc'); //Generate PDF for Backup
 
             return $this->sendResponse($data);
 

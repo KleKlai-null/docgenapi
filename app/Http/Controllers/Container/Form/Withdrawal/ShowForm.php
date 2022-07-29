@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Container\Form\Withdrawal;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\PdfGeneratorProcess;
+use App\Models\Form\Memorandum;
+use App\Models\Form\ServiceCall;
 use App\Models\Form\WithdrawalSlip\Wsdm;
 use App\Models\Form\WithdrawalSlip\Wsfa;
 use App\Models\Form\WithdrawalSlip\Wsfg;
@@ -12,8 +15,9 @@ use App\Models\Form\WithdrawalSlip\Wsmi;
 use App\Models\Form\WithdrawalSlip\Wsmro;
 use App\Services\DocumentService;
 use Illuminate\Support\Str;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ShowForm extends Controller
 {
@@ -24,7 +28,7 @@ class ShowForm extends Controller
 
         switch ($unique) {
             case 'mi': 
-                $data = Wsmi::with('items')->where('document_series_no', $request->key)->first();
+                $data = Wsmi::with('items')->where('document_series_no', 'GFI-MI-2022-00001')->first();
 
                 abort_if(!$data, 404);
                 // Generate PDF File
@@ -74,5 +78,18 @@ class ShowForm extends Controller
             default: 
                 abort(404);
         }
+    }
+
+    public function generatePDF()
+    {
+        $data = ServiceCall::first();
+
+        $qrcode = base64_encode(QrCode::format('svg')->size(110)->errorCorrection('H')->generate($data->document_series_no));
+        $pdf = Pdf::loadView('forms.pdf.sc', compact('qrcode', 'data'))->setPaper('portrait');
+        // return $pdf->download('invoice.pdf');
+        return $pdf->stream();
+        // $content = $pdf->download()->getOriginalContent();
+        // Storage::disk('local')->put('bak/pdf/'.$data->document_series_no.'.pdf',$content) ;
+
     }
 }
