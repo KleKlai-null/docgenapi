@@ -13,7 +13,6 @@ use App\Models\Form\WithdrawalSlip\Wsmi;
 use App\Models\Form\WithdrawalSlip\Wsmro;
 use App\Models\Form\Memorandum;
 use App\Models\Form\ServiceCall;
-use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -150,7 +149,7 @@ class DocumentService
     public static function generatePDF($data, $type)
     {
         try {
-            $qrcode = base64_encode(\QrCode::format('svg')->size(110)->errorCorrection('H')->generate(config('app.url').'/verify/key='.$data->document_series_no));
+            $qrcode = base64_encode(QrCode::format('svg')->size(110)->errorCorrection('H')->generate(config('app.url').'/verify/key='.$data->document_series_no));
 
             $pdf = Pdf::loadView('forms.pdf.'.$type, compact('qrcode', 'data'))->setPaper('portrait');
             $content = $pdf->download()->getOriginalContent();
