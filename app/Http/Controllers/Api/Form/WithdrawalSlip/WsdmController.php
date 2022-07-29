@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Form\WithdrawalSlip\WsdmRequest;
 use App\Models\Form\Item\DmItem;
 use App\Models\Form\WithdrawalSlip\Wsdm;
+use App\Services\DocumentService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -77,6 +78,8 @@ class WsdmController extends ApiController
             }
 
             DB::commit();
+            
+            DocumentService::generatePDF($data, 'dm'); //Generate PDF for Backup
 
             return $this->sendResponse($data);
 

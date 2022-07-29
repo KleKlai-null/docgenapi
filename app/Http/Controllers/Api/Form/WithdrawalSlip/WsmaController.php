@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Form\WithdrawalSlip\WsmaRequest;
 use App\Models\Form\Item\MaItem;
 use App\Models\Form\WithdrawalSlip\Wsma;
+use App\Services\DocumentService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -76,6 +77,8 @@ class WsmaController extends ApiController
             }
 
             DB::commit();
+
+            DocumentService::generatePDF($data, 'ma'); //Generate PDF for Backup
 
             return $this->sendResponse($data);
 

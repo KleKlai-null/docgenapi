@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\DocumentService;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,20 +24,15 @@ class UserManagementController extends ApiController
         try {
 
             $data = User::where('email', $request->email)->first();
-
-            $this->validate($request, [
-                'password'  => 'required'
-            ]);
-
+                
             $data->update([
                 'password'  => Hash::make($request->password)
-            ]);
-
-            //Get User Roles && sync new roles
+            ]);    
 
             return $this->sendResponse($data);
 
         } catch (Exception $exception) {
+
             return $this->sendError($exception);
         }
     }
@@ -46,7 +42,7 @@ class UserManagementController extends ApiController
         try {
 
             $data = User::findOrFail(auth()->user()->id);
-
+            
             $data->update([
                 'password'  => Hash::make($request->password)
             ]);

@@ -8,6 +8,7 @@ use App\Http\Requests\Form\WithdrawalSlip\WsmroRequest;
 use App\Models\Form\Item;
 use App\Models\Form\Item\MroItem;
 use App\Models\Form\WithdrawalSlip\Wsmro;
+use App\Services\DocumentService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -79,6 +80,8 @@ class WsmroController extends ApiController
             }
 
             DB::commit();
+
+            DocumentService::generatePDF($data, 'mro'); //Generate PDF for Backup
 
             return $this->sendResponse($data);
         } catch (Exception $exception) {

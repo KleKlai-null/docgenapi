@@ -8,6 +8,7 @@ use App\Http\Requests\Form\WithdrawalSlip\WsmiRequest;
 use App\Models\Form\Item;
 use App\Models\Form\Item\MiItem;
 use App\Models\Form\WithdrawalSlip\Wsmi;
+use App\Services\DocumentService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -75,6 +76,8 @@ class WsmiController extends ApiController
             }
 
             DB::commit();
+
+            DocumentService::generatePDF($data, 'mi'); //Generate PDF for Backup
 
             return $this->sendResponse($data);
         } catch (Exception $exception) {

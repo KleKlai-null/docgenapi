@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Form\WithdrawalSlip\WsfaRequest;
 use App\Models\Form\Item\FaItem;
 use App\Models\Form\WithdrawalSlip\Wsfa;
+use App\Services\DocumentService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -76,6 +77,8 @@ class WsfaController extends ApiController
             }
 
             DB::commit();
+
+            DocumentService::generatePDF($data, 'fa'); //Generate PDF for Backup
 
             return $this->sendResponse($data);
 
