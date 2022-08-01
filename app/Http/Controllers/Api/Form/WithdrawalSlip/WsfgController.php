@@ -34,7 +34,7 @@ class WsfgController extends ApiController
                 return $this->sendResponse($data);
             }
     
-            return $this->sendResponse(Wsfg::with('items')->orderBy('id', 'desc')->get());
+            return $this->sendResponse(Wsfg::GetData()->get());
 
         } catch (Exception $exception) {
             return $this->sendError($exception);

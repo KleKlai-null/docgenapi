@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('memoranda', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('document_series_no');
             $table->string('id_no');
             $table->string('name_of_employee');

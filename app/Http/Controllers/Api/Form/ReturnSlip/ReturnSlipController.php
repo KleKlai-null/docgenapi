@@ -20,6 +20,7 @@ class ReturnSlipController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index(Request $request)
     {
         try {
@@ -32,41 +33,9 @@ class ReturnSlipController extends ApiController
 
             $unique = Str::lower($request->form);
 
-            switch ($unique) {
-                case "mi":
+            $data = ReturnSlip::GetData($unique)->get();
 
-                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'mi')->orderBy('id', 'desc')->get();
-
-                    return $data;
-                    break;
-                case "mro":
-                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'mro')->orderBy('id', 'desc')->get();
-
-                    return $data;
-                    break;
-                case "dm":
-                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'dm')->orderBy('id', 'desc')->get();
-
-                    return $data;
-                    break;
-                case "fg":
-                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'fg')->orderBy('id', 'desc')->get();
-
-                    return $data;
-                    break;
-                case "fa":
-                    $data = ReturnSlip::with('items')->where('withdrawal_form', 'fa')->orderBy('id', 'desc')->get();
-
-                    return $data;
-                    break;
-                case "ma":
-                    $data = $data = ReturnSlip::with('items')->where('withdrawal_form', 'ma')->orderBy('id', 'desc')->get();
-
-                    return $data;
-                    break;
-                default:
-                    return 'No result found';
-            }
+            return $data;
 
         } catch (Exception $exception) {
             return $this->sendError($exception);

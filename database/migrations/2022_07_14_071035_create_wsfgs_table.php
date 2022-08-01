@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('wsfgs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('document_series_no');
             $table->string('batch_no');
             $table->string('pallet_no');

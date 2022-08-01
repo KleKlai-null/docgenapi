@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('return_slips', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('withdrawal_form');
             $table->string('document_series_no');
             $table->string('department');
