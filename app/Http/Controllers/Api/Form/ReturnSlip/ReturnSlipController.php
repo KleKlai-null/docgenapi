@@ -100,7 +100,6 @@ class ReturnSlipController extends ApiController
                 'withdrawal_form'       => Str::lower($request->withdrawal_form),
                 'department'            => $request->department,
                 'mr_no'                 => $request->mr_no,
-                'document_series_no'    => $request->document_series_no,
                 'withdrawal_slip_no'    => $request->withdrawal_slip_no,
                 'prepared_by'           => $request->prepared_by,
                 'approved_by'           => $request->approved_by,
@@ -133,7 +132,7 @@ class ReturnSlipController extends ApiController
 
             DB::commit();
             
-            DocumentService::generatePDF($data, $request->withdrawal_form); //Generate PDF for Backup
+            DocumentService::generatePDF($data, 'sc'); //Generate PDF for Backup
 
             return $this->sendResponse($data);
 
