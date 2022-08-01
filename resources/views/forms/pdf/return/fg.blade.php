@@ -286,7 +286,7 @@
                         <td style="word-wrap: break-word; max-width: 150px;">{{ $item->item_description }}</td>
                         <td>{{ $item->qty }}</td>
                         <td>{{ $item->uom }}</td>
-                        <td>{{ $item->remarks }}</td>
+                        <td>{{ $item->received_by }}</td>
                     </tr>
                 @endforeach
             </tbody>
