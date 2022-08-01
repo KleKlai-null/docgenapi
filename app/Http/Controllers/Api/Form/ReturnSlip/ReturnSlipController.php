@@ -132,7 +132,7 @@ class ReturnSlipController extends ApiController
 
             DB::commit();
             
-            DocumentService::generatePDF($data, 'rs'); //Generate PDF for Backup
+            DocumentService::generatePDF($data, 'mi', true); //Generate PDF for Backup
 
             return $this->sendResponse($data);
 

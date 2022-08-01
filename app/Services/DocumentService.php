@@ -146,12 +146,18 @@ class DocumentService
         }
     }
 
-    public static function generatePDF($data, $type)
+    public static function generatePDF($data, $type, $rs = false)
     {
         try {
+
             $qrcode = base64_encode(QrCode::format('svg')->size(110)->errorCorrection('H')->generate(config('app.url').'/verify/key='.$data->document_series_no));
 
-            $pdf = Pdf::loadView('forms.pdf.'.$type, compact('qrcode', 'data'))->setPaper('portrait');
+            if($rs == true) {
+                $pdf = Pdf::loadView('forms.pdf.return.'.$type, compact('qrcode', 'data'))->setPaper('portrait');
+            } else if($rs == false) {
+                $pdf = Pdf::loadView('forms.pdf.'.$type, compact('qrcode', 'data'))->setPaper('portrait');
+            }
+
             $content = $pdf->download()->getOriginalContent();
             Storage::disk('local')->put('bak/pdf/'.$data->document_series_no.'-'.now()->format('His').'.pdf',$content) ;
         

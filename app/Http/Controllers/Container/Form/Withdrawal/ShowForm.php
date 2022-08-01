@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Container\Form\Withdrawal;
 use App\Http\Controllers\Controller;
 use App\Jobs\PdfGeneratorProcess;
 use App\Models\Form\Memorandum;
+use App\Models\Form\ReturnSlip\ReturnSlip;
 use App\Models\Form\ServiceCall;
 use App\Models\Form\WithdrawalSlip\Wsdm;
 use App\Models\Form\WithdrawalSlip\Wsfa;
@@ -80,16 +81,16 @@ class ShowForm extends Controller
         }
     }
 
-    public function generatePDF()
-    {
-        $data = ServiceCall::first();
+    // public function generatePDF()
+    // {
+    //     $data = ReturnSlip::first();
 
-        $qrcode = base64_encode(QrCode::format('svg')->size(110)->errorCorrection('H')->generate($data->document_series_no));
-        $pdf = Pdf::loadView('forms.pdf.sc', compact('qrcode', 'data'))->setPaper('portrait');
-        // return $pdf->download('invoice.pdf');
-        return $pdf->stream();
-        // $content = $pdf->download()->getOriginalContent();
-        // Storage::disk('local')->put('bak/pdf/'.$data->document_series_no.'.pdf',$content) ;
+    //     $qrcode = base64_encode(QrCode::format('svg')->size(110)->errorCorrection('H')->generate($data->document_series_no));
+    //     $pdf = Pdf::loadView('forms.pdf.return.mi', compact('qrcode', 'data'))->setPaper('portrait');
+    //     // return $pdf->download('invoice.pdf');
+    //     return $pdf->stream();
+    //     // $content = $pdf->download()->getOriginalContent();
+    //     // Storage::disk('local')->put('bak/pdf/'.$data->document_series_no.'.pdf',$content) ;
 
-    }
+    // }
 }

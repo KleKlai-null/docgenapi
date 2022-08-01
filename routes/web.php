@@ -26,4 +26,4 @@ Route::get('form/show', [ShowForm::class, 'show']);
 // Public Access
 Route::get('/verify/{key?}', [DocVerificationController::class, 'verifyDocument']);
 
-Route::get('/test', [ShowForm::class, 'generatePDF']);
+// Route::get('/test', [ShowForm::class, 'generatePDF']);
