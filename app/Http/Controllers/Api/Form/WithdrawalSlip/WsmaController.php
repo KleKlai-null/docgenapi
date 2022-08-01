@@ -34,7 +34,7 @@ class WsmaController extends ApiController
                 return $this->sendResponse($data);
             }
     
-            return $this->sendResponse(Wsma::with('items')->orderBy('id', 'desc')->get());
+            return $this->sendResponse(Wsma::GetData()->get());
 
         } catch (Exception $exception) {
             return $this->sendError($exception);

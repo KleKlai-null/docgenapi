@@ -36,7 +36,7 @@ class WsmroController extends ApiController
                 return $this->sendResponse($data);
             }
 
-            return $this->sendResponse(Wsmro::with('items')->orderBy('id', 'desc')->get());
+            return $this->sendResponse(Wsmro::GetData()->get());
         } catch (Exception $exception) {
             return $this->sendError($exception);
         }

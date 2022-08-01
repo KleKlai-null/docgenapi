@@ -34,7 +34,7 @@ class WsfaController extends ApiController
                 return $this->sendResponse($data);
             }
     
-            return $this->sendResponse(Wsfa::with('items')->orderBy('id', 'desc')->get());
+            return $this->sendResponse(Wsfa::GetData()->get());
 
         } catch (Exception $exception) {
             return $this->sendError($exception);

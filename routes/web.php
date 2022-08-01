@@ -2,6 +2,15 @@
 
 use App\Http\Controllers\Container\DocVerificationController;
 use App\Http\Controllers\Container\Form\Withdrawal\ShowForm;
+use App\Models\Form\Memorandum;
+use App\Models\Form\ReturnSlip\ReturnSlip;
+use App\Models\Form\ServiceCall;
+use App\Models\Form\WithdrawalSlip\Wsdm;
+use App\Models\Form\WithdrawalSlip\Wsfa;
+use App\Models\Form\WithdrawalSlip\Wsfg;
+use App\Models\Form\WithdrawalSlip\Wsma;
+use App\Models\Form\WithdrawalSlip\Wsmi;
+use App\Models\Form\WithdrawalSlip\Wsmro;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -27,3 +36,13 @@ Route::get('form/show', [ShowForm::class, 'show']);
 Route::get('/verify/{key?}', [DocVerificationController::class, 'verifyDocument']);
 
 // Route::get('/test', [ShowForm::class, 'generatePDF']);
+
+Route::get('/userhasmodel', function () {
+    $data = User::with('returnslips')->find(9);
+    dd($data);
+});
+
+Route::get('/modelbelongsto', function () {
+    $data = ReturnSlip::find(1)->user;
+    dd($data);
+});

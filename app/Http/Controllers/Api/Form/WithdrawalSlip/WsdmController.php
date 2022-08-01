@@ -34,7 +34,7 @@ class WsdmController extends ApiController
                 return $this->sendResponse($data);
             }
     
-            return $this->sendResponse(Wsdm::with('items')->orderBy('id', 'desc')->get());
+            return $this->sendResponse(Wsdm::GetData()->get());
 
         } catch (Exception $exception) {
             return $this->sendError($exception);
