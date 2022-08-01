@@ -33,8 +33,9 @@ class WsmiController extends ApiController
 
                 return $this->sendResponse($data);
             }
-
+            
             return $this->sendResponse(Wsmi::GetData()->get());
+
         } catch (Exception $exception) {
             return $this->sendError($exception);
         }

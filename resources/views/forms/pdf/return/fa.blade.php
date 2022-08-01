@@ -285,7 +285,7 @@
                         <td>{{ $item->item_code }}</td>
                         <td style="word-wrap: break-word; max-width: 150px;">{{ $item->item_description }}</td>
                         <td>{{ $item->qty }}</td>
-                        <td>{{ $item->uom }}</td>
+                        <td>{{ $item->serial_no }}</td>
                         <td>{{ $item->reason }}</td>
                     </tr>
                 @endforeach
