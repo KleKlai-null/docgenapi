@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Form\ReturnSlip\ReturnSlipRequest;
 use App\Models\Form\Item\ReturnItem;
 use App\Models\Form\ReturnSlip\ReturnSlip;
+use App\Services\DocumentService;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -132,6 +133,8 @@ class ReturnSlipController extends ApiController
 
             DB::commit();
             
+            DocumentService::generatePDF($data, $request->withdrawal_form); //Generate PDF for Backup
+
             return $this->sendResponse($data);
 
         } catch (Exception $exception) {
