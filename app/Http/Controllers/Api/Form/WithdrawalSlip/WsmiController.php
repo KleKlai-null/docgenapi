@@ -35,6 +35,7 @@ class WsmiController extends ApiController
             }
 
             return $this->sendResponse(Wsmi::with('items')->orderBy('id', 'desc')->get());
+            
         } catch (Exception $exception) {
             return $this->sendError($exception);
         }
